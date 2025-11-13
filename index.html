@@ -1,0 +1,1595 @@
+git clone https://github.com/Un8ic/adaptarium.ru.git
+
+cd adaptarium.ru
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>АДАПТАРИУМ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #7bb3ff;
+            --accent-color: #ff6b6b;
+            --light-color: #f0f8ff;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --border-radius: 12px;
+            --shadow: 0 4px 12px rgba(0,0,0,0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Open Sans', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4f1ff 100%);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            overflow: hidden;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .fish {
+            font-size: 1.5rem;
+            margin-right: 10px;
+            animation: swim 3s infinite ease-in-out;
+        }
+        
+        @keyframes swim {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-5px) rotate(5deg); }
+        }
+        
+        .company-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        nav {
+            background-color: var(--dark-color);
+            padding: 0.8rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .nav-links li {
+            margin: 5px 15px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 30px;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .nav-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        
+        main {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        
+        .page {
+            display: none;
+            background-color: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .active {
+            display: block;
+        }
+        
+        .login-form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            background: white;
+            box-shadow: var(--shadow);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+        
+        input[type="text"],
+        input[type="password"],
+        textarea, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+        }
+        
+        button {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            font-size: 1rem;
+            box-shadow: 0 4px 10px rgba(74, 144, 226, 0.3);
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(74, 144, 226, 0.4);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #6c757d 0%, #8d99a7 100%);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, var(--accent-color) 0%, #ff8e8e 100%);
+        }
+        
+        .contacts {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 20px;
+        }
+        
+        .contact-card {
+            width: 200px;
+            text-align: center;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            background: white;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .contact-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 3px solid var(--primary-color);
+        }
+        
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .material-card {
+            border-radius: var(--border-radius);
+            padding: 25px;
+            transition: var(--transition);
+            background: white;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .material-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .games-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 25px;
+        }
+        
+        .game-card {
+            width: 320px;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            text-align: center;
+            background: white;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .game-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .tests-container {
+            margin-top: 20px;
+        }
+        
+        .test-card {
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            background: white;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .comment-section {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .comment {
+            padding: 12px;
+            margin-bottom: 10px;
+            background-color: white;
+            border-radius: 8px;
+            border-left: 3px solid var(--secondary-color);
+        }
+        
+        .delete-comment {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            float: right;
+            font-size: 0.8rem;
+        }
+        
+        .employees-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .employee-card {
+            border-radius: var(--border-radius);
+            padding: 20px;
+            text-align: center;
+            background: white;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .employee-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .employee-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 3px solid var(--primary-color);
+        }
+        
+        .profile-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 4px solid var(--primary-color);
+        }
+        
+        .analytics-container {
+            margin-top: 20px;
+        }
+        
+        .analytics-card {
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            background: white;
+            box-shadow: var(--shadow);
+        }
+        
+        .progress-bar {
+            height: 20px;
+            background-color: #e9ecef;
+            border-radius: 10px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+        
+        .chat-container {
+            border-radius: var(--border-radius);
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            background: white;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            padding: 12px 16px;
+            border-radius: 18px;
+            max-width: 70%;
+            word-wrap: break-word;
+        }
+        
+        .message.self {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            margin-left: auto;
+        }
+        
+        .message.other {
+            background-color: white;
+            color: var(--text-color);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .chat-input {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid #e9ecef;
+            background: white;
+        }
+        
+        .chat-input input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            margin-right: 10px;
+        }
+        
+        footer {
+            background: linear-gradient(135deg, var(--dark-color) 0%, #34495e 100%);
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 50px;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: none;
+            z-index: 1000;
+            font-weight: 500;
+        }
+        
+        .notification.error {
+            background: linear-gradient(135deg, var(--accent-color) 0%, #e74c3c 100%);
+        }
+        
+        .qr-code {
+            text-align: center;
+            margin: 40px 0;
+            padding: 30px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .qr-code img {
+            max-width: 200px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .material-content, .game-content, .test-content {
+            padding: 30px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-top: 20px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .option {
+            padding: 12px 15px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .option:hover {
+            background: #f0f8ff;
+            border-color: var(--primary-color);
+        }
+        
+        .option.selected {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .game-area {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .game-stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        
+        .stat {
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .back-button {
+            margin-bottom: 20px;
+        }
+        
+        .completed {
+            color: #2ecc71;
+            font-weight: 600;
+        }
+        
+        .in-progress {
+            color: #f39c12;
+            font-weight: 600;
+        }
+        
+        .not-started {
+            color: #95a5a6;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .games-container, .contacts {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .game-card, .contact-card {
+                width: 100%;
+                max-width: 350px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <span class="fish">🐠</span>
+            <span class="fish">🐟</span>
+            <span class="fish">🐡</span>
+            <div class="company-name">АДАПТАРИУМ</div>
+            <span class="fish">🦈</span>
+            <span class="fish">🐠</span>
+            <span class="fish">🐟</span>
+        </div>
+        <div id="user-info" style="display: none;">
+            <span id="user-name"></span>
+            <button id="logout-btn" style="margin-left: 10px;">Выйти</button>
+        </div>
+    </header>
+    
+    <nav id="main-nav" style="display: none;">
+        <ul class="nav-links" id="nav-links">
+            <!-- Навигационные ссылки будут добавлены динамически -->
+        </ul>
+    </nav>
+    
+    <main>
+        <!-- Страница входа -->
+        <div id="login-page" class="page active">
+            <h1 style="text-align: center; margin-bottom: 30px;">Вход в систему АДАПТАРИУМ</h1>
+            <div class="login-form">
+                <div class="form-group">
+                    <label for="username">Логин:</label>
+                    <input type="text" id="username" placeholder="Введите логин">
+                </div>
+                <div class="form-group">
+                    <label for="password">Пароль:</label>
+                    <input type="password" id="password" placeholder="Введите пароль">
+                </div>
+                <button id="login-btn" style="width: 100%;">Войти</button>
+                
+                <div style="margin-top: 20px; text-align: center;">
+                    <p><strong>Тестовые аккаунты:</strong></p>
+                    <p>Начальник: adminFish / adminFish</p>
+                    <p>Менеджер: Ivanova / Ivanova</p>
+                </div>
+            </div>
+            
+            <div class="qr-code">
+                <h3>Доступ через QR-код</h3>
+                <p>Отсканируйте QR-код для быстрого доступа к сайту</p>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://un8ic.github.io/adaptarium.ru/">
+                <p style="margin-top: 15px; font-size: 0.9rem; color: #666;">Сайт: https://un8ic.github.io/adaptarium-system.example.com</p>
+            </div>
+        </div>
+        
+        <!-- Главная страница -->
+        <div id="home-page" class="page">
+            <h1>Добро пожаловать в АДАПТАРИУМ</h1>
+            <p>Цифровой сервис для адаптации персонала "АДАПТАРИУМ" - это инновационное решение для сокращения текучести кадров и ускорения выхода новых сотрудников на плановые показатели.</p>
+            
+            <h2>О нашем продукте</h2>
+            <p>Цифровой сервис решает ключевую проблему адаптации и выгорания персонала в высоконагруженных отделах организаций, таких как отдел продаж. Цифровой сервис позволяет вновь прибывшим сотрудникам сократить адаптационный период и быстрее выйти на необходимый уровень эффективности в работе.</p>
+            
+            <p>Сервис доступен с любого устройства (компьютер, планшет, смартфон) для новых сотрудников отделов продаж, которые смогут учиться в удобное для них время и в любом месте. Сервис предоставляет четкую структуру обучения с поэтапным доступом к информации, от общих сведений о компании до специфических знаний о продуктах и техниках продаж. Обучение включает в себя видеоуроки, тесты, интерактивные упражнения и симуляции, чтобы максимально вовлечь новых сотрудников в процесс.</p>
+            
+            <p>Сервис использует гибридную модель контента: базовый универсальный модуль (уведомления, антистресс-игры, общие рекомендации) сочетается с настраиваемыми элементами (например, интеграция специфичных KPI для обратной связи, брендирование под компанию-клиента).</p>
+            
+            <h2>Наша команда</h2>
+            <div class="contacts">
+                <div class="contact-card">
+                    <img src="https://psv4.userapi.com/s/v1/d2/BsQIRUBHgqDIqGPNcAkiSTEtIbIqrfmkCb4sv_9aELW8PYurnO75S9kQ0ABhlZhwQj2KT5kB5e4Ckq7WIkzJF6aucWFNO6WKt-emghC9OeDL1jzII97SQERkJqt7ljVg8-BP4iJ6v8dR/MarakshinaAlina.jpg" alt="Маракшина Алина" class="contact-photo">
+                    <h3>Маракшина Алина</h3>
+                </div>
+                <div class="contact-card">
+                    <img src="https://psv4.userapi.com/s/v1/d2/d8s5BdzeRXjf5yP2oEN_zVXnbw7yYzlKCValQsIGQ7snKRvDpqGh1ELh8gxJYPU9WYjaTpafNgGbDBDVOcIidF2nbezazByY2BNCjpVvlXrWrFokXJadP1_RUZvya97P02XnL72XPyEP/FedotovaYulia.jpg" alt="Федотова Юлия" class="contact-photo">
+                    <h3>Федотова Юлия</h3>
+                </div>
+                <div class="contact-card">
+                    <img src="https://psv4.userapi.com/s/v1/d2/eBnI7vGnoBDKa0gIbD6Ken-Gem7JWqXxtfGeG7s5Vae0W6MGzvsZyMyem_uqmp_NW_ARoKgw2foeu6fd0BRKMPwfgYbl4XwkaaDiPL9CVWqUpHnYkyilYAM2POGX4IrcNhIy6fZRXa4H/VarnakovaIrina.jpg" alt="Варнакова Ирина" class="contact-photo">
+                    <h3>Варнакова Ирина</h3>
+                </div>
+                <div class="contact-card">
+                    <img src="https://psv4.userapi.com/s/v1/d2/KaFdM2B2Jbt8dgFtIxsemJgrDL2zWQ6PpEF1lpYtfRUIaJki3moc33Dx3zr73rLI2KZfoThRKqwXdwjRdT4sA1Kgpoy90fCUCYCcYVnTR8-IijH2m85N7CYyzqIKrFgHCNsNehPlNftn/ZubkovaAnastasia.jpg" alt="Зубкова Анастасия" class="contact-photo">
+                    <h3>Зубкова Анастасия</h3>
+                </div>
+            </div>
+            
+            <div style="margin-top: 30px; text-align: center; padding: 20px; background: #f0f8ff; border-radius: var(--border-radius);">
+                <h3>Наш Telegram-бот</h3>
+                <p>Для быстрого доступа к материалам и уведомлениям</p>
+                <a href="https://t.me/Adaptarium_bot" target="_blank" style="display: inline-block; margin-top: 10px; padding: 10px 20px; background: var(--primary-color); color: white; border-radius: 30px; text-decoration: none; font-weight: 600;">@Adaptarium_bot</a>
+            </div>
+        </div>
+        
+        <!-- Страница материалов для обучения -->
+        <div id="materials-page" class="page">
+            <h1>Материалы для обучения</h1>
+            <p>Изучите материалы для эффективной работы в отделе продаж</p>
+            
+            <div class="materials-grid">
+                <div class="material-card">
+                    <h3>Введение в компанию</h3>
+                    <p>Основные сведения о компании, её миссии и ценностях.</p>
+                    <button onclick="openMaterialPage('company-intro')">Изучить</button>
+                    <span class="not-started" id="company-intro-status">Не начато</span>
+                </div>
+                <div class="material-card">
+                    <h3>Продукты и услуги</h3>
+                    <p>Подробное описание продуктов и услуг компании.</p>
+                    <button onclick="openMaterialPage('products-services')">Изучить</button>
+                    <span class="not-started" id="products-services-status">Не начато</span>
+                </div>
+                <div class="material-card">
+                    <h3>Техники продаж</h3>
+                    <p>Эффективные методики и подходы к продажам.</p>
+                    <button onclick="openMaterialPage('sales-techniques')">Изучить</button>
+                    <span class="not-started" id="sales-techniques-status">Не начато</span>
+                </div>
+                <div class="material-card">
+                    <h3>Работа с возражениями</h3>
+                    <p>Как правильно реагировать на возражения клиентов.</p>
+                    <button onclick="openMaterialPage('objection-handling')">Изучить</button>
+                    <span class="not-started" id="objection-handling-status">Не начато</span>
+                </div>
+                <div class="material-card">
+                    <h3>Ведение переговоров</h3>
+                    <p>Стратегии успешного ведения переговоров.</p>
+                    <button onclick="openMaterialPage('negotiation')">Изучить</button>
+                    <span class="not-started" id="negotiation-status">Не начато</span>
+                </div>
+                <div class="material-card">
+                    <h3>Клиентоориентированность</h3>
+                    <p>Принципы качественного обслуживания клиентов.</p>
+                    <button onclick="openMaterialPage('customer-centric')">Изучить</button>
+                    <span class="not-started" id="customer-centric-status">Не начато</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Отдельные страницы материалов -->
+        <div id="company-intro-page" class="page">
+            <button class="back-button" onclick="goBack()">← Назад к материалам</button>
+            <h2>Введение в компанию</h2>
+            <p>Наша компания была основана в 2010 году с целью предоставления инновационных решений для бизнеса. За это время мы выросли из небольшого стартапа в лидера рынка с представительствами в 15 странах.</p>
+            
+            <h3>Наша миссия</h3>
+            <p>Мы стремимся преобразовать подход компаний к управлению продажами через внедрение передовых технологий и методологий.</p>
+            
+            <h3>Ценности компании</h3>
+            <ul>
+                <li><strong>Инновации</strong> - постоянно ищем новые пути улучшения наших продуктов и услуг</li>
+                <li><strong>Качество</strong> - обеспечиваем высочайшие стандарты во всем, что мы делаем</li>
+                <li><strong>Клиентоориентированность</strong> - ставим потребности клиентов в центр нашей деятельности</li>
+                <li><strong>Командная работа</strong> - верим, что вместе мы достигаем большего</li>
+            </ul>
+            
+            <div style="margin-top: 30px; text-align: center;">
+                <button onclick="completeMaterial('company-intro')">Завершить изучение</button>
+            </div>
+        </div>
+        
+        <div id="products-services-page" class="page">
+            <button class="back-button" onclick="goBack()">← Назад к материалам</button>
+            <h2>Продукты и услуги</h2>
+            <p>Наша компания предлагает широкий спектр продуктов и услуг, направленных на оптимизацию бизнес-процессов и увеличение эффективности продаж.</p>
+            
+            <h3>Основные продукты</h3>
+            <ul>
+                <li><strong>CRM-система "Продавец Про"</strong> - комплексное решение для управления взаимоотношениями с клиентами</li>
+                <li><strong>Аналитика продаж "Инсайт"</strong> - платформа для глубокого анализа данных о продажах</li>
+                <li><strong>Мобильное приложение "Продажи OnTheGo"</strong> - решение для мобильных менеджеров по продажам</li>
+            </ul>
+            
+            <h3>Дополнительные услуги</h3>
+            <ul>
+                <li>Консультации по внедрению CRM-систем</li>
+                <li>Обучение сотрудников работе с нашими продуктами</li>
+                <li>Техническая поддержка 24/7</li>
+                <li>Кастомизация решений под специфические потребности бизнеса</li>
+            </ul>
+            
+            <div style="margin-top: 30px; text-align: center;">
+                <button onclick="completeMaterial('products-services')">Завершить изучение</button>
+            </div>
+        </div>
+        
+        <!-- Страница обучения -->
+        <div id="training-page" class="page">
+            <h1>Обучение</h1>
+            
+            <div style="margin-bottom: 30px;">
+                <h2>VR-обучение</h2>
+                <p>Иммерсивное обучение в виртуальной реальности для отработки навыков продаж в реалистичных условиях.</p>
+                <button id="vr-training-btn">Открыть VR-обучение</button>
+            </div>
+            
+            <div>
+                <h2>2D-обучение (игровой формат)</h2>
+                <p>Выберите тип игры для обучения. Все игры содержат одинаковые учебные материалы, но представлены в разных форматах.</p>
+                <div class="games-container">
+                    <div class="game-card">
+                        <div class="game-icon">🧩</div>
+                        <h3>Квест "Продавец-легенда"</h3>
+                        <p>Пройдите квест, выполняя задания по продажам и обслуживанию клиентов.</p>
+                        <button onclick="openGamePage('quest')">Начать игру</button>
+                    </div>
+                    <div class="game-card">
+                        <div class="game-icon">🎮</div>
+                        <h3>Симулятор переговоров</h3>
+                        <p>Потренируйтесь в ведении переговоров с виртуальными клиентами.</p>
+                        <button onclick="openGamePage('simulator')">Начать игру</button>
+                    </div>
+                    <div class="game-card">
+                        <div class="game-icon">❓</div>
+                        <h3>Викторина "Эксперт продаж"</h3>
+                        <p>Проверьте свои знания в области продаж в формате увлекательной викторины.</p>
+                        <button onclick="openGamePage('quiz')">Начать игру</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Отдельные страницы игр -->
+        <div id="quest-game-page" class="page">
+            <button class="back-button" onclick="goBack()">← Назад к играм</button>
+            <h2>Квест "Продавец-легенда"</h2>
+            <p>Помогите клиентам решить их проблемы и станьте легендой продаж!</p>
+            
+            <div class="game-stats">
+                <div class="stat">
+                    <div class="stat-value" id="quest-score">0</div>
+                    <div>Очки</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="quest-level">1</div>
+                    <div>Уровень</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="quest-clients">0</div>
+                    <div>Клиенты</div>
+                </div>
+            </div>
+            
+            <div class="game-area">
+                <h3 id="quest-scenario">К вам подходит первый клиент. Он выглядит заинтересованным, но не решается сделать покупку.</h3>
+                <div style="margin: 20px 0;">
+                    <button onclick="questAnswer(1)">Предложить скидку</button>
+                    <button onclick="questAnswer(2)">Рассказать о преимуществах продукта</button>
+                    <button onclick="questAnswer(3)">Спросить о его потребностях</button>
+                </div>
+                <div id="quest-result" style="min-height: 50px; padding: 10px; background: white; border-radius: 8px; margin-top: 15px;"></div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <button onclick="nextQuestScenario()">Следующий клиент</button>
+            </div>
+        </div>
+        
+        <div id="simulator-game-page" class="page">
+            <button class="back-button" onclick="goBack()">← Назад к играм</button>
+            <h2>Симулятор переговоров</h2>
+            <p>Потренируйтесь в ведении переговоров с разными типами клиентов.</p>
+            
+            <div class="game-stats">
+                <div class="stat">
+                    <div class="stat-value" id="simulator-score">0</div>
+                    <div>Очки</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="simulator-success">0%</div>
+                    <div>Успех</div>
+                </div>
+            </div>
+            
+            <div class="game-area">
+                <h3 id="simulator-scenario">Вы встречаетесь с потенциальным клиентом. Он скептически настроен и задает сложные вопросы.</h3>
+                <div style="margin: 20px 0;">
+                    <button onclick="simulatorAnswer(1)">Начать с представления компании</button>
+                    <button onclick="simulatorAnswer(2)">Сначала задать вопросы о его бизнесе</button>
+                    <button onclick="simulatorAnswer(3)">Сразу перейти к демонстрации продукта</button>
+                </div>
+                <div id="simulator-result" style="min-height: 50px; padding: 10px; background: white; border-radius: 8px; margin-top: 15px;"></div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <button onclick="nextSimulatorScenario()">Следующая встреча</button>
+            </div>
+        </div>
+        
+        <div id="quiz-game-page" class="page">
+            <button class="back-button" onclick="goBack()">← Назад к играм</button>
+            <h2>Викторина "Эксперт продаж"</h2>
+            <p>Проверьте свои знания в области продаж. Ответьте на все вопросы правильно!</p>
+            
+            <div class="game-stats">
+                <div class="stat">
+                    <div class="stat-value" id="quiz-score">0</div>
+                    <div>Очки</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="quiz-progress">1/5</div>
+                    <div>Вопросы</div>
+                </div>
+            </div>
+            
+            <div class="game-area">
+                <div id="quiz-question" class="question">
+                    <h3>Что является самым важным на первом этапе продажи?</h3>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this)">Представление продукта</div>
+                        <div class="option" onclick="selectOption(this)">Установление контакта и выявление потребностей</div>
+                        <div class="option" onclick="selectOption(this)">Закрытие сделки</div>
+                        <div class="option" onclick="selectOption(this)">Обсуждение цены</div>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button onclick="checkQuizAnswer()">Проверить ответ</button>
+                    <button onclick="nextQuizQuestion()" style="display: none;" id="next-quiz-btn">Следующий вопрос</button>
+                </div>
+                <div id="quiz-result" style="min-height: 50px; padding: 10px; background: white; border-radius: 8px; margin-top: 15px;"></div>
+            </div>
+        </div>
+        
+        <!-- Страница тестов -->
+        <div id="tests-page" class="page">
+            <h1>Тесты</h1>
+            <p>Проверьте свои знания после изучения материалов</p>
+            
+            <div class="tests-container">
+                <div class="test-card">
+                    <h3>Тест по продуктам компании</h3>
+                    <p>Проверьте свои знания о продуктах и услугах компании.</p>
+                    <button onclick="openTestPage('products-test')">Пройти тест</button>
+                    <span class="not-started" id="products-test-status">Не пройден</span>
+                    
+                    <div class="comment-section">
+                        <h4>Комментарии:</h4>
+                        <div id="test1-comments">
+                            <!-- Комментарии будут добавляться динамически -->
+                        </div>
+                        <div class="form-group">
+                            <textarea id="test1-comment" placeholder="Добавить комментарий" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+                            <button onclick="addComment('test1')">Добавить комментарий</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="test-card">
+                    <h3>Тест по техникам продаж</h3>
+                    <p>Оцените свое понимание эффективных методик продаж.</p>
+                    <button onclick="openTestPage('sales-test')">Пройти тест</button>
+                    <span class="not-started" id="sales-test-status">Не пройден</span>
+                    
+                    <div class="comment-section">
+                        <h4>Комментарии:</h4>
+                        <div id="test2-comments">
+                            <!-- Комментарии будут добавляться динамически -->
+                        </div>
+                        <div class="form-group">
+                            <textarea id="test2-comment" placeholder="Добавить комментарий" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+                            <button onclick="addComment('test2')">Добавить комментарий</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="test-card">
+                    <h3>Тест по работе с возражениями</h3>
+                    <p>Проверьте, насколько хорошо вы умеете работать с возражениями клиентов.</p>
+                    <button onclick="openTestPage('objections-test')">Пройти тест</button>
+                    <span class="not-started" id="objections-test-status">Не пройден</span>
+                    
+                    <div class="comment-section">
+                        <h4>Комментарии:</h4>
+                        <div id="test3-comments">
+                            <!-- Комментарии будут добавляться динамически -->
+                        </div>
+                        <div class="form-group">
+                            <textarea id="test3-comment" placeholder="Добавить комментарий" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+                            <button onclick="addComment('test3')">Добавить комментарий</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Отдельные страницы тестов -->
+        <div id="products-test-page" class="page">
+            <button class="back-button" onclick="goBack()">← Назад к тестам</button>
+            <h2>Тест по продуктам компании</h2>
+            <p>Ответьте на вопросы о наших продуктах и услугах.</p>
+            
+            <div id="test-questions">
+                <div class="question">
+                    <h3>1. Какой наш основной продукт для управления взаимоотношениями с клиентами?</h3>
+                    <div class="options">
+                        <div class="option" onclick="selectTestOption(this, 'products-test')">CRM-система "Продавец Про"</div>
+                        <div class="option" onclick="selectTestOption(this, 'products-test')">Мобильное приложение "Продажи OnTheGo"</div>
+                        <div class="option" onclick="selectTestOption(this, 'products-test')">Аналитика продаж "Инсайт"</div>
+                        <div class="option" onclick="selectTestOption(this, 'products-test')">Платформа для email-рассылок</div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <h3>2. Какая услуга НЕ входит в наш пакет дополнительных услуг?</h3>
+                    <div class="options">
+                        <div class="option" onclick="selectTestOption(this, 'products-test')">Консультации по внедрению CRM-систем</div>
+                        <div class="option" onclick="selectTestOption(this, 'products-test')">Обучение сотрудников</div>
+                        <div class="option" onclick="selectTestOption(this, 'products-test')">Техническая поддержка 24/7</div>
+                        <div class="option" onclick="selectTestOption(this, 'products-test')">Бухгалтерское сопровождение</div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <h3>3. Какое решение мы предлагаем для мобильных менеджеров по продажам?</h3>
+                    <div class="options">
+                        <div class="option" onclick="selectTestOption(this, 'products-test')">Мобильное приложение "Продажи OnTheGo"</div>
+                        <div class="option" onclick="selectTestOption(this, 'products-test')">Веб-платформа "Удаленный офис"</div>
+                        <div class="option" onclick="selectTestOption(this, 'products-test')">Телеграм-бот для продаж</div>
+                        <div class="option" onclick="selectTestOption(this, 'products-test')">Видеоконференции "Виртуальные встречи"</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <button onclick="submitTest('products-test')">Завершить тест</button>
+            </div>
+        </div>
+        
+        <!-- Остальные страницы (отзывы, сотрудники, профиль, подчиненные, аналитика) -->
+        <div id="feedback-page" class="page">
+            <h1>Отзывы и общение</h1>
+            
+            <div style="margin-bottom: 30px;">
+                <h2>Отзывы о сотрудниках</h2>
+                <div class="form-group">
+                    <textarea id="new-feedback" placeholder="Напишите отзыв о коллеге..." style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; height: 100px;"></textarea>
+                    <button onclick="addFeedback()">Добавить отзыв</button>
+                </div>
+                <div id="feedbacks-list">
+                    <!-- Отзывы будут добавляться динамически -->
+                </div>
+            </div>
+            
+            <div>
+                <h2>Общий чат отдела</h2>
+                <div class="chat-container">
+                    <div class="chat-messages" id="chat-messages">
+                        <!-- Сообщения будут добавляться динамически -->
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="chat-input" placeholder="Введите сообщение...">
+                        <button onclick="sendMessage()">Отправить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="employees-page" class="page">
+            <h1>Наша команда</h1>
+            <div class="employees-grid">
+                <div class="employee-card">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Иванов Иван" class="employee-photo">
+                    <h3>Иванов Иван</h3>
+                    <p>Менеджер по продажам</p>
+                </div>
+                <div class="employee-card">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Петрова Мария" class="employee-photo">
+                    <h3>Петрова Мария</h3>
+                    <p>Старший менеджер</p>
+                </div>
+                <div class="employee-card">
+                    <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Сидоров Алексей" class="employee-photo">
+                    <h3>Сидоров Алексей</h3>
+                    <p>Менеджер по ключевым клиентам</p>
+                </div>
+                <div class="employee-card">
+                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Козлова Анна" class="employee-photo">
+                    <h3>Козлова Анна</h3>
+                    <p>Менеджер по продажам</p>
+                </div>
+                <div class="employee-card">
+                    <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Федоров Дмитрий" class="employee-photo">
+                    <h3>Федоров Дмитрий</h3>
+                    <p>Руководитель отдела продаж</p>
+                </div>
+            </div>
+        </div>
+        
+        <div id="profile-page" class="page">
+            <h1>Личный кабинет</h1>
+            <div class="profile-container">
+                <img id="profile-photo" src="https://randomuser.me/api/portraits/men/1.jpg" alt="Фото профиля" class="profile-photo">
+                <input type="file" id="photo-upload" accept="image/*" style="margin-bottom: 20px;">
+                <button onclick="updatePhoto()">Обновить фото</button>
+                
+                <div class="form-group" style="width: 300px;">
+                    <label for="profile-name">Имя:</label>
+                    <input type="text" id="profile-name" value="Иванов Иван" style="width: 100%;">
+                </div>
+                
+                <div class="form-group" style="width: 300px;">
+                    <label for="profile-position">Должность:</label>
+                    <input type="text" id="profile-position" value="Менеджер по продажам" style="width: 100%;">
+                </div>
+                
+                <div class="form-group" style="width: 300px;">
+                    <label for="new-password">Новый пароль:</label>
+                    <input type="password" id="new-password" placeholder="Введите новый пароль" style="width: 100%;">
+                </div>
+                
+                <div class="form-group" style="width: 300px;">
+                    <label for="confirm-password">Подтвердите пароль:</label>
+                    <input type="password" id="confirm-password" placeholder="Подтвердите новый пароль" style="width: 100%;">
+                </div>
+                
+                <button onclick="updateProfile()">Сохранить изменения</button>
+            </div>
+        </div>
+        
+        <div id="subordinates-page" class="page">
+            <h1>Мои подчиненные</h1>
+            <div class="employees-grid" id="subordinates-list">
+                <!-- Список подчиненных будет заполнен динамически -->
+            </div>
+        </div>
+        
+        <div id="analytics-page" class="page">
+            <h1>Аналитика по прохождениям тестов</h1>
+            <div class="analytics-container" id="analytics-list">
+                <!-- Аналитика будет заполнена динамически -->
+            </div>
+            
+            <h2 style="margin-top: 30px;">Комментарии к тестам</h2>
+            <div id="all-comments">
+                <!-- Все комментарии будут отображены здесь -->
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p>АДАПТАРИУМ &copy; 2025. Все права защищены.</p>
+    </footer>
+    
+    <div class="notification" id="notification"></div>
+
+    <script>
+        // Данные пользователей
+        const users = {
+            'adminFish': {
+                password: 'adminFish',
+                name: 'Администратор',
+                role: 'admin'
+            },
+            'Ivanova': {
+                password: 'Ivanova',
+                name: 'Иванова Мария',
+                role: 'manager'
+            },
+            'TopProdaj': {
+                password: 'TopProdaj',
+                name: 'Петров Алексей',
+                role: 'manager'
+            },
+            '1234': {
+                password: '1234',
+                name: 'Сидорова Ольга',
+                role: 'manager'
+            },
+            'OtdelProdaj': {
+                password: 'OtdelProdaj',
+                name: 'Козлов Дмитрий',
+                role: 'manager'
+            },
+            'Leto': {
+                password: 'Leto',
+                name: 'Николаева Анна',
+                role: 'manager'
+            },
+            'Petrov': {
+                password: 'Petrov',
+                name: 'Петров Иван',
+                role: 'manager'
+            },
+            'RAB': {
+                password: 'RAB',
+                name: 'Смирнова Елена',
+                role: 'manager'
+            },
+            'PIRS': {
+                password: 'PIRS',
+                name: 'Васильев Максим',
+                role: 'manager'
+            },
+            'NSUEM': {
+                password: 'NSUEM',
+                name: 'Фролов Сергей',
+                role: 'manager'
+            },
+            'BusinessTUT': {
+                password: 'BusinessTUT',
+                name: 'Морозова Татьяна',
+                role: 'manager'
+            }
+        };
+
+        // Текущий пользователь
+        let currentUser = null;
+        
+        // История навигации для кнопки "Назад"
+        let navigationHistory = [];
+        
+        // Навигационные ссылки для разных ролей
+        const navLinks = {
+            manager: [
+                { id: 'home-page', text: 'Главная' },
+                { id: 'materials-page', text: 'Материалы' },
+                { id: 'training-page', text: 'Обучение' },
+                { id: 'tests-page', text: 'Тесты' },
+                { id: 'feedback-page', text: 'Отзывы и чат' },
+                { id: 'employees-page', text: 'Сотрудники' },
+                { id: 'profile-page', text: 'Личный кабинет' }
+            ],
+            admin: [
+                { id: 'home-page', text: 'Главная' },
+                { id: 'subordinates-page', text: 'Подчиненные' },
+                { id: 'analytics-page', text: 'Аналитика' },
+                { id: 'profile-page', text: 'Личный кабинет' }
+            ]
+        };
+
+        // Функции для навигации по материалам, играм и тестам
+        function openMaterialPage(materialId) {
+            navigationHistory.push('materials-page');
+            showPage(materialId + '-page');
+        }
+
+        function openGamePage(gameType) {
+            navigationHistory.push('training-page');
+            showPage(gameType + '-game-page');
+            
+            // Инициализация игры
+            if (gameType === 'quest') {
+                initQuestGame();
+            } else if (gameType === 'simulator') {
+                initSimulatorGame();
+            } else if (gameType === 'quiz') {
+                initQuizGame();
+            }
+        }
+
+        function openTestPage(testId) {
+            navigationHistory.push('tests-page');
+            showPage(testId + '-page');
+        }
+
+        function goBack() {
+            if (navigationHistory.length > 0) {
+                const previousPage = navigationHistory.pop();
+                showPage(previousPage);
+            } else {
+                showPage('home-page');
+            }
+        }
+
+        function completeMaterial(materialId) {
+            document.getElementById(materialId + '-status').textContent = 'Завершено';
+            document.getElementById(materialId + '-status').className = 'completed';
+            showNotification('Материал успешно изучен!');
+            goBack();
+        }
+
+        // Функции для игр
+        function initQuestGame() {
+            document.getElementById('quest-score').textContent = '0';
+            document.getElementById('quest-level').textContent = '1';
+            document.getElementById('quest-clients').textContent = '0';
+            document.getElementById('quest-result').textContent = '';
+        }
+
+        function questAnswer(answer) {
+            const results = [
+                "Клиент согласился на скидку, но ваша прибыль уменьшилась.",
+                "Клиент оценил преимущества и совершил покупку!",
+                "Вы выявили реальные потребности клиента и предложили идеальное решение!"
+            ];
+            
+            const scores = [10, 25, 40];
+            
+            document.getElementById('quest-result').textContent = results[answer-1];
+            
+            const currentScore = parseInt(document.getElementById('quest-score').textContent);
+            document.getElementById('quest-score').textContent = currentScore + scores[answer-1];
+            
+            const currentClients = parseInt(document.getElementById('quest-clients').textContent);
+            document.getElementById('quest-clients').textContent = currentClients + 1;
+            
+            if (currentClients + 1 >= 3) {
+                document.getElementById('quest-level').textContent = '2';
+                showNotification('Поздравляем! Вы достигли нового уровня!');
+            }
+        }
+
+        function nextQuestScenario() {
+            const scenarios = [
+                "К вам обращается постоянный клиент с жалобой на работу продукта.",
+                "Новый клиент интересуется вашими услугами, но сомневается в их необходимости.",
+                "Клиент хочет приобрести продукт, но у него ограниченный бюджет."
+            ];
+            
+            const randomScenario = scenarios[Math.floor(Math.random() * scenarios.length)];
+            document.getElementById('quest-scenario').textContent = randomScenario;
+            document.getElementById('quest-result').textContent = '';
+        }
+
+        function initSimulatorGame() {
+            document.getElementById('simulator-score').textContent = '0';
+            document.getElementById('simulator-success').textContent = '0%';
+            document.getElementById('simulator-result').textContent = '';
+        }
+
+        function simulatorAnswer(answer) {
+            const results = [
+                "Клиент остался равнодушен к формальному представлению.",
+                "Клиент оценил ваш интерес к его бизнесу и открылся для диалога!",
+                "Клиент счел демонстрацию преждевременной и прервал встречу."
+            ];
+            
+            const scores = [5, 30, 0];
+            
+            document.getElementById('simulator-result').textContent = results[answer-1];
+            
+            const currentScore = parseInt(document.getElementById('simulator-score').textContent);
+            document.getElementById('simulator-score').textContent = currentScore + scores[answer-1];
+            
+            // Обновляем процент успеха
+            const successRate = Math.min(100, Math.floor((currentScore + scores[answer-1]) / 50 * 100));
+            document.getElementById('simulator-success').textContent = successRate + '%';
+        }
+
+        function nextSimulatorScenario() {
+            const scenarios = [
+                "Встреча с техническим директором, который задает детальные вопросы о функционале.",
+                "Переговоры с финансовым директором, concerned about ROI.",
+                "Презентация для команды маркетинга, interested in integration capabilities."
+            ];
+            
+            const randomScenario = scenarios[Math.floor(Math.random() * scenarios.length)];
+            document.getElementById('simulator-scenario').textContent = randomScenario;
+            document.getElementById('simulator-result').textContent = '';
+        }
+
+        let currentQuizQuestion = 1;
+        let quizScore = 0;
+
+        function initQuizGame() {
+            currentQuizQuestion = 1;
+            quizScore = 0;
+            document.getElementById('quiz-score').textContent = '0';
+            document.getElementById('quiz-progress').textContent = '1/5';
+            document.getElementById('quiz-result').textContent = '';
+            document.getElementById('next-quiz-btn').style.display = 'none';
+            
+            // Сброс выбранных вариантов
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+        }
+
+        function selectOption(element) {
+            // Снимаем выделение со всех вариантов в этом вопросе
+            const question = element.closest('.question');
+            question.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // Выделяем выбранный вариант
+            element.classList.add('selected');
+        }
+
+        function checkQuizAnswer() {
+            const selectedOption = document.querySelector('.option.selected');
+            if (!selectedOption) {
+                showNotification('Пожалуйста, выберите вариант ответа', true);
+                return;
+            }
+            
+            // Проверяем правильность ответа (в данном случае правильный - второй вариант)
+            const isCorrect = selectedOption.textContent === 'Установление контакта и выявление потребностей';
+            
+            if (isCorrect) {
+                quizScore += 20;
+                document.getElementById('quiz-score').textContent = quizScore;
+                document.getElementById('quiz-result').textContent = 'Правильно! +20 очков';
+                document.getElementById('quiz-result').style.color = '#2ecc71';
+            } else {
+                document.getElementById('quiz-result').textContent = 'Неправильно. Правильный ответ: Установление контакта и выявление потребностей';
+                document.getElementById('quiz-result').style.color = '#e74c3c';
+            }
+            
+            document.getElementById('next-quiz-btn').style.display = 'inline-block';
+        }
+
+        function nextQuizQuestion() {
+            if (currentQuizQuestion < 5) {
+                currentQuizQuestion++;
+                document.getElementById('quiz-progress').textContent = currentQuizQuestion + '/5';
+                document.getElementById('quiz-result').textContent = '';
+                document.getElementById('next-quiz-btn').style.display = 'none';
+                
+                // Сброс выбранных вариантов
+                document.querySelectorAll('.option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                
+                // В реальном приложении здесь будет загрузка следующего вопроса
+                if (currentQuizQuestion === 5) {
+                    showNotification('Викторина завершена! Ваш результат: ' + quizScore + ' очков');
+                }
+            }
+        }
+
+        // Функции для тестов
+        function selectTestOption(element, testId) {
+            // Снимаем выделение со всех вариантов в этом вопросе
+            const question = element.closest('.question');
+            question.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // Выделяем выбранный вариант
+            element.classList.add('selected');
+        }
+
+        function submitTest(testId) {
+            document.getElementById(testId + '-status').textContent = 'Пройден';
+            document.getElementById(testId + '-status').className = 'completed';
+            showNotification('Тест успешно пройден!');
+            goBack();
+        }
+
+        // Остальные функции (отзывы, чат, комментарии, профиль, аналитика)
+        // ... (остальной код JavaScript остается без изменений)
+
+        // Функция для показа уведомления
+        function showNotification(message, isError = false) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = isError ? 'notification error' : 'notification';
+            notification.style.display = 'block';
+            
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+
+        // Функция для входа в систему
+        document.getElementById('login-btn').addEventListener('click', function() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (users[username] && users[username].password === password) {
+                currentUser = {
+                    username: username,
+                    name: users[username].name,
+                    role: users[username].role
+                };
+                
+                // Сохраняем данные пользователя в localStorage
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                
+                // Показываем навигацию и информацию о пользователе
+                document.getElementById('main-nav').style.display = 'block';
+                document.getElementById('user-info').style.display = 'block';
+                document.getElementById('user-name').textContent = currentUser.name;
+                
+                // Создаем навигационные ссылки
+                createNavLinks(currentUser.role);
+                
+                // Переходим на главную страницу
+                showPage('home-page');
+                
+                // Скрываем страницу входа
+                document.getElementById('login-page').classList.remove('active');
+                
+                showNotification('Добро пожаловать, ' + currentUser.name + '!');
+                
+            } else {
+                showNotification('Неверный логин или пароль', true);
+            }
+        });
+
+        // Функция для выхода из системы
+        document.getElementById('logout-btn').addEventListener('click', function() {
+            currentUser = null;
+            localStorage.removeItem('currentUser');
+            
+            // Скрываем навигацию и информацию о пользователе
+            document.getElementById('main-nav').style.display = 'none';
+            document.getElementById('user-info').style.display = 'none';
+            
+            // Показываем страницу входа
+            document.getElementById('login-page').classList.add('active');
+            
+            // Скрываем все другие страницы
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                if (page.id !== 'login-page') {
+                    page.classList.remove('active');
+                }
+            });
+            
+            showNotification('Вы вышли из системы');
+        });
+
+        // Функция для создания навигационных ссылок
+        function createNavLinks(role) {
+            const navLinksContainer = document.getElementById('nav-links');
+            navLinksContainer.innerHTML = '';
+            
+            navLinks[role].forEach(link => {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = '#';
+                a.textContent = link.text;
+                a.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showPage(link.id);
+                });
+                li.appendChild(a);
+                navLinksContainer.appendChild(li);
+            });
+        }
+
+        // Функция для показа страницы
+        function showPage(pageId) {
+            // Скрываем все страницы
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Показываем выбранную страницу
+            document.getElementById(pageId).classList.add('active');
+            
+            // Если это страница подчиненных или аналитики, заполняем её данными
+            if (pageId === 'subordinates-page') {
+                loadSubordinates();
+            } else if (pageId === 'analytics-page') {
+                loadAnalytics();
+            } else if (pageId === 'feedback-page') {
+                displayFeedbacks();
+                displayChatMessages();
+            } else if (pageId === 'tests-page') {
+                displayComments('test1');
+                displayComments('test2');
+                displayComments('test3');
+            }
+        }
+
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            // Проверяем, есть ли сохраненный пользователь
+            const savedUser = localStorage.getItem('currentUser');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                
+                // Показываем навигацию и информацию о пользователе
+                document.getElementById('main-nav').style.display = 'block';
+                document.getElementById('user-info').style.display = 'block';
+                document.getElementById('user-name').textContent = currentUser.name;
+                
+                // Создаем навигационные ссылки
+                createNavLinks(currentUser.role);
+                
+                // Переходим на главную страницу
+                showPage('home-page');
+                
+                // Скрываем страницу входа
+                document.getElementById('login-page').classList.remove('active');
+            }
+            
+            // Обработчик для VR-обучения
+            document.getElementById('vr-training-btn').addEventListener('click', function() {
+                showNotification('VR-обучение находится в разработке');
+            });
+            
+            // Обработчик для отправки сообщения по Enter
+            document.getElementById('chat-input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
+
+git add index.html
+git commit -m "Добавлен сайт АДАПТАРИУМ"
+git push
